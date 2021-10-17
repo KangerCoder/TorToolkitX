@@ -336,15 +336,11 @@ async def upload_a_file(
 	if user_msg is not None:
 		dis_thumb = user_db.get_var("DISABLE_THUMBNAIL", user_msg.sender_id)
 		if dis_thumb is False or dis_thumb is None:
-			try:
-				thumb_path = user_db.get_thumbnail(user_msg.sender_id)
-				output_file_name = os.path.basename(path)
-				subprocess.call(f"ffmpeg -hide_banner -loglevel -y -i '{path}' -c copy -attach '{thumb_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
-				print("Running ffmpeg")
-				os.replace(output_file_name,path)
-			except Exception as e:
-				print("Error occured at changing thumb:", e)
-				thumb_path = user_db.get_thumbnail(user_msg.sender_id)
+			thumb_path = user_db.get_thumbnail(user_msg.sender_id)
+			output_file_name = os.path.basename(path)
+			subprocess.call(f"ffmpeg -hide_banner -loglevel -y -i '{path}' -c copy -attach '{thumb_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
+			print("Running ffmpeg")
+			os.replace(output_file_name,path)
 			if not thumb_path:
 				thumb_path = None
 
@@ -546,15 +542,11 @@ async def upload_single_file(
 	if user_msg is not None:
 		dis_thumb = user_db.get_var("DISABLE_THUMBNAIL", user_msg.sender_id)
 		if dis_thumb is False or dis_thumb is None:
-			try:
-				thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
-				output_file_name = os.path.basename(path)
-				subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
-				print(f"Running ffmpeg")
-				os.replace(output_file_name,path)
-			except Exception as e:
-				print("Error occured at changing thumb:", e)
-				thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
+			thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
+			output_file_name = os.path.basename(path)
+			subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
+			print(f"Running ffmpeg")
+			os.replace(output_file_name,path)
 			if not thumb_image_path:
 				thumb_image_path = None
 	#
