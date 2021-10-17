@@ -337,7 +337,7 @@ async def upload_a_file(
         dis_thumb = user_db.get_var("DISABLE_THUMBNAIL", user_msg.sender_id)
         if dis_thumb is False or dis_thumb is None:
             thumb_path = user_db.get_thumbnail(user_msg.sender_id)
-            await subprocess.call(f"ffmpeg -y -i {path} -c copy -attach {thumb_path} -metadata:s:t mimetype=image/jpeg -map 0 {path}",shell=True)
+            await subprocess.call(f"ffmpeg -y -i '{path}' -c copy -attach '{thumb_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{path}'",shell=True)
             if not thumb_path:
                 thumb_path = None
 
@@ -540,7 +540,7 @@ async def upload_single_file(
         dis_thumb = user_db.get_var("DISABLE_THUMBNAIL", user_msg.sender_id)
         if dis_thumb is False or dis_thumb is None:
             thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
-            await subprocess.call(f"ffmpeg -y -i {path} -c copy -attach {thumb_image_path} -metadata:s:t mimetype=image/jpeg -map 0 {path}",shell=True)
+            await subprocess.call(f"ffmpeg -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{path}'",shell=True)
             if not thumb_image_path:
                 thumb_image_path = None
     #
