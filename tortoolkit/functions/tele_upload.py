@@ -346,7 +346,6 @@ async def upload_a_file(
 					new_path = f"{os.path.dirname(path)}/{output_file_name}"
 				subprocess.call(f"ffmpeg -hide_banner -loglevel -y -i '{path}' -c copy -attach '{thumb_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
 				logging.info("Running ffmpeg")
-				os.replace(output_file_name,path)
 				shutil.move(output_file_name, path)
 				path = new_path
 			except Exception as e:
@@ -562,7 +561,7 @@ async def upload_single_file(
 					new_path = f"{os.path.dirname(path)}/{output_file_name}"
 				subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
 				logging.info(f"Running ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ")
-				shutil.move(output_file_name, path)
+				shutil.move(output_file_name, new_path)
 				path = new_path
 			except Exception as e:
 				logging.info(f"Error occured at changing thumb: {e}")
