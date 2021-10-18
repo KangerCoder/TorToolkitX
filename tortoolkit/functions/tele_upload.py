@@ -9,6 +9,7 @@ import shutil
 import time
 import traceback
 import subprocess
+from PIL.Image import new
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
@@ -559,6 +560,7 @@ async def upload_single_file(
 				logging.info(f"Running ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ")
 				os.replace(output_file_name,new_path)
 				os.remove(path)
+				path = new_path
 			except Exception as e:
 				logging.info(f"Error occured at changing thumb: {e}")
 				thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
