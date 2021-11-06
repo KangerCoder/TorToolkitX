@@ -341,12 +341,11 @@ async def upload_a_file(
 				thumb_path = user_db.get_thumbnail(user_msg.sender_id)
 				output_file_name = os.path.basename(path)
 				new_path = path
-				if output_file_name.rsplit(".",maxsplit=1)[1] != "mkv":
-					output_file_name = output_file_name.rsplit(".",maxsplit=1)[0]+".mkv"
+				if output_file_name.rsplit(".",maxsplit=1)[1] == "mkv":
 					new_path = f"{os.path.dirname(path)}/{output_file_name}"
-				subprocess.call(f"ffmpeg -hide_banner -loglevel -y -i '{path}' -c copy -attach '{thumb_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
-				logging.info("Running ffmpeg")
-				shutil.move(output_file_name, new_path)
+					subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
+					logging.info(f"Adding thumbnail to {output_file_name} for mkv")
+					shutil.move(output_file_name, new_path)
 				path = new_path
 			except Exception as e:
 				logging.info(f"Error occured at changing thumb: {e}")
@@ -556,12 +555,16 @@ async def upload_single_file(
 				thumb_image_path = user_db.get_thumbnail(user_msg.sender_id)
 				output_file_name = os.path.basename(path)
 				new_path = path
-				if output_file_name.rsplit(".",maxsplit=1)[1] != "mkv":
-					output_file_name = output_file_name.rsplit(".",maxsplit=1)[0]+".mkv"
+				if output_file_name.rsplit(".",maxsplit=1)[1] == "mkv":
 					new_path = f"{os.path.dirname(path)}/{output_file_name}"
-				subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
-				logging.info(f"Running ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ")
-				shutil.move(output_file_name, new_path)
+					subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
+					logging.info(f"Adding thumbnail to {output_file_name} for mkv")
+					shutil.move(output_file_name, new_path)
+				# elif output_file_name.rsplit(".",maxsplit=1)[1] == 'mp4':
+				# 	new_path = f"{os.path.dirname(path)}/{output_file_name}"
+				# 	subprocess.call(f"ffmpeg -hide_banner -loglevel error -y -i '{path}' -c copy -attach '{thumb_image_path}' -metadata:s:t mimetype=image/jpeg -map 0 '{output_file_name}' ",shell=True)
+				# 	logging.info(f"Adding thumbnail to {output_file_name} for mp4")
+				# 	shutil.move(output_file_name, new_path)
 				path = new_path
 			except Exception as e:
 				logging.info(f"Error occured at changing thumb: {e}")
