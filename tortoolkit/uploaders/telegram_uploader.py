@@ -3,6 +3,7 @@
 
 import asyncio
 from functools import partial
+from ..utils.misc_utils import clear_stuff
 
 from pyrogram.types import InputMediaDocument, InputMediaVideo, InputMediaPhoto, InputMediaAudio, InlineKeyboardButton, InlineKeyboardMarkup
 from ..core.base_task import BaseTask
@@ -77,6 +78,7 @@ class TelegramUploader(BaseTask):
 
         status_mgr.set_inactive()
         await self.print_files()
+        await clear_stuff(self._path)
         
         return self.files_dict
 
@@ -224,11 +226,11 @@ class TelegramUploader(BaseTask):
                 self._updb.deregister_upload(message.chat_id,message.id)
 
         else:
-            logging.info("Uploading the file:- {}".format(path))
+            torlog.info("Uploading the file:- {} with size {}".format(path, os.path.getsize(path)))
+            print(get_val("TG_UP_LIMIT"))
             if os.path.getsize(path) > get_val("TG_UP_LIMIT"):
                 # the splitted file will be considered as a single upload ;)
-                
-                
+                torlog.info("Splitting the file now")
                 metadata = extractMetadata(createParser(path))
                 
                 if metadata is not None:

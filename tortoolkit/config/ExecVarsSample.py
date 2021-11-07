@@ -61,6 +61,8 @@ except:
         QBIT_UNAME = "admin"
         QBIT_PASS = "adminadmin"
         QBIT_MAX_RETRIES = 2
+        ADD_CUSTOM_TRACKERS = True
+        TRACKER_SOURCE = "https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt"
 
         # Gdrive Config
         GDRIVE_BASE_DIR = "/"
@@ -104,8 +106,14 @@ except:
         SA_FOLDER_ID = ""
         SA_TD_ID = ""
         SA_ACCOUNTS_FOLDER = ""
+        SA_ZIP_FILE = False
 
         SA_ACCOUNT_NUMBER = 0
+
+        UPTOBOX_TOKEN = ""
+
+        USE_RAR_SPLIT = False
+        FORCE_SPLIT_UPLOAD = False
 
         # Name of the RCLONE drive from the config
         DEF_RCLONE_DRIVE = ""

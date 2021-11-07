@@ -32,6 +32,14 @@ class TaskSequence:
         self._dest_drive = None
 
     async def execute(self):
+        if self._entity_message is None:
+            if len(self._user_msg.text.split(" ", 1)) == 2:
+                self._entity_message = self._user_msg
+                self._entity_message.text = self._user_msg.text.split(" ", 1)[1]
+            else:
+                await self._user_msg.reply("No Link Found.")
+                return
+                
         if self._task_type == self.LEECH:
             choices = await self.get_leech_choices()
             
@@ -81,7 +89,7 @@ class TaskSequence:
                     if extracted_path is not False:
                         dl_path = extracted_path
                 
-            elif choices["zip"]:
+            elif choices["zip"] or get_val("FORCE_SPLIT_UPLOAD"):
                 arch_obj = Archiver(dl_path,  prev_update_message, self._user_msg, not choices["rclone"])
                 archived_path = await arch_obj.execute()
                 if archived_path is not False:
