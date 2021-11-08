@@ -287,9 +287,10 @@ async def upload_a_file(
 		user_msg = await message.get_reply_message()
 
 	# todo improve this uploading ✔️
-	prefix = get_val("PREFIX")
-	os.rename(path,f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}')
-	path = f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}'
+	if get_val("PREFIX") is not None:
+		prefix = get_val("PREFIX")
+		os.rename(path,f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}')
+		path = f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}'
 	file_name = ""
 	file_name += os.path.basename(path)
 	caption_str = ""
@@ -505,9 +506,10 @@ async def upload_single_file(
 
 	queue = message.client.exqueue
 
-	prefix = get_val("PREFIX")
-	os.rename(path,f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}')
-	path = f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}'
+	if get_val("PREFIX") is not None:
+		prefix = get_val("PREFIX")
+		os.rename(path,f"{os.path.dirname(path)}/{prefix} {os.path.basename(path)}")
+		path = f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}'
 	file_name = ""
 	file_name += os.path.basename(path)
 	caption_str = ""
