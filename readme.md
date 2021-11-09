@@ -183,6 +183,8 @@ Steps:-
   - Default Value :- `0`
   - Use :- Used to restrict use of certain stuff to owner only. 
 ### ***Optional Vars***
+- `PREFIX`
+  - Values:- Any string that you want to add as prefix to filename
 - `GD_INDEX_URL`
   - Values :- Base URL of the index that you are using. (Now that you should include the directory also in URL if you have set `RCLONE_BASE_DIR`). (Dosen't matter if a slash is at the end or not)
   - Default Value :- `False`
