@@ -293,8 +293,10 @@ async def upload_a_file(
 		path = f'{os.path.dirname(path)}/{prefix} {os.path.basename(path)}'
 	file_name = ""
 	file_name += os.path.basename(path)
+	caption_str += f"`{file_name}`"
+
 	caption_str = ""
-	caption_str += file_name
+
 	metadata = extractMetadata(createParser(path))
 
 	if metadata is not None:
@@ -513,8 +515,8 @@ async def upload_single_file(
 	file_name = ""
 	file_name += os.path.basename(path)
 	caption_str = ""
-	caption_str += file_name
-
+	caption_str += f"`{file_name}`"
+	
 	if user_msg is None:
 		user_msg = await message.get_reply_message()
 
