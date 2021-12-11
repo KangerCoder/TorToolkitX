@@ -333,7 +333,6 @@ async def check_link(msg, rclone=False, is_zip=False, extract=False, prev_msg=No
                 torlog.info("The aria2 Downloading:\n{}".format(url))
                 await aio.sleep(1)
                 url = msg.text
-                print(url)
                 url = await generate_directs(url)
                 if url is not None:
                     if "**ERROR:" in url:
