@@ -100,6 +100,7 @@ async def generate_directs(url):
 			# return ourl
 			torlog.info(url)
 			unx = url.split('net/')[1]
+			torlog.info(unx)
 			hdr = {'user-agent':'Mozilla/5.0 (Linux; Android 10; SM-A115F Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.152 Mobile Safari/537.36'}
 			dat = {'op':'download2','id':unx,'rand':'','referer':'','method_free':'','method_premium':''}
 			raw = requests.post(url,data=dat,headers=hdr).text
