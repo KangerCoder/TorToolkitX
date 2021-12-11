@@ -379,7 +379,7 @@ async def upload_a_file(
 			out_msg = await msg.edit(file=path, text=caption_str)
 		else:
 
-			if file_name.rsplit('.',1)[-1]=='mp4' and not force_docs:
+			if ftype == "video" and not force_docs:
 				try:
 					if thumb_path is not None:
 						thumb = thumb_path
@@ -605,7 +605,7 @@ async def upload_single_file(
 					f"Waiting over for the worker here for {file_name} aquired worker {uploader_id}"
 				)
 
-		if file_name.rsplit('.',1)[-1]=='mp4' and not force_docs:
+		if ftype == "video" and not force_docs:
 			metadata = extractMetadata(createParser(path))
 			duration = 0
 			if metadata.has("duration"):
