@@ -82,35 +82,35 @@ async def generate_directs(url):
 			return "**ERROR:** Cant't download, double check your zippyshare link!"
 
 	# racaty.net
-	elif "racaty.net" in url:
-		try:
-			# link = re.findall(r"\bhttps?://.*racaty\.net\S+", url)[0]
-			# async with aiohttp.ClientSession() as ttksess:
-			#	 resp = await ttksess.get(link)
-			#	 restext = await resp.text()
-			# bss = BeautifulSoup(restext, "html.parser")
-			# op = bss.find("input", {"name": "op"})["value"]
-			# id = bss.find("input", {"name": "id"})["value"]
+	# elif "racaty.net" in url:
+	# 	try:
+	# 		# link = re.findall(r"\bhttps?://.*racaty\.net\S+", url)[0]
+	# 		# async with aiohttp.ClientSession() as ttksess:
+	# 		#	 resp = await ttksess.get(link)
+	# 		#	 restext = await resp.text()
+	# 		# bss = BeautifulSoup(restext, "html.parser")
+	# 		# op = bss.find("input", {"name": "op"})["value"]
+	# 		# id = bss.find("input", {"name": "id"})["value"]
 
-			# async with aiohttp.ClientSession() as ttksess:
-			#	 rep = await ttksess.post(link, data={"op": op, "id": id})
-			#	 reptext = await rep.text()
-			# bss2 = BeautifulSoup(reptext, "html.parser")
-			# ourl = bss2.find("a", {"id": "uniqueExpirylink"})["href"]
-			# return ourl
-			torlog.info(url)
-			unx = url.split('net/')[1]
-			torlog.info(unx)
-			# hdr = {'user-agent':'Mozilla/5.0 (Linux; Android 10; SM-A115F Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.152 Mobile Safari/537.36'}
-			dat = {'op':'download2','id':unx,'rand':'','referer':'','method_free':'','method_premium':''}
-			raw = requests.post(url,data=dat).text
-			new = BeautifulSoup(raw,'html.parser').find('a',{'id':'uniqueExpirylink'})['href']
-			new = urllib.parse.quote(new)
-			torlog.info(new)
-			return new
+	# 		# async with aiohttp.ClientSession() as ttksess:
+	# 		#	 rep = await ttksess.post(link, data={"op": op, "id": id})
+	# 		#	 reptext = await rep.text()
+	# 		# bss2 = BeautifulSoup(reptext, "html.parser")
+	# 		# ourl = bss2.find("a", {"id": "uniqueExpirylink"})["href"]
+	# 		# return ourl
+	# 		torlog.info(url)
+	# 		unx = url.split('net/')[1]
+	# 		torlog.info(unx)
+	# 		hdr = {'user-agent':'Mozilla/5.0 (Linux; Android 10; SM-A115F Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.152 Mobile Safari/537.36'}
+	# 		dat = {'op':'download2','id':unx,'rand':'','referer':'','method_free':'','method_premium':''}
+	# 		raw = requests.post(url,data=dat,headers=hdr).text
+	# 		new = BeautifulSoup(raw,'html.parser').find('a',{'id':'uniqueExpirylink'})['href']
+	# 		new = urllib.parse.quote(new)
+	# 		torlog.info(new)
+	# 		return new
 
-		except Exception as err:
-			return f"**ERROR:** Cant't download, double check your racaty link! ({err})"
+	# 	except Exception as err:
+	# 		return f"**ERROR:** Cant't download, double check your racaty link! ({err})"
 
 	elif "pixeldrain.com" in url:
 		url = url.strip("/ ")
