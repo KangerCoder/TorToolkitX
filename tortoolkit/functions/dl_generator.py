@@ -107,8 +107,8 @@ async def generate_directs(url):
 			print(new)
 			return new
 
-		except:
-			return "**ERROR:** Cant't download, double check your racaty link!"
+		except Exception as err:
+			return f"**ERROR:** Cant't download, double check your racaty link! ({err})"
 
 	elif "pixeldrain.com" in url:
 		url = url.strip("/ ")
